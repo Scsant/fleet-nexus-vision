@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { Layers } from "lucide-react";
+import { Layers, Shield, Hexagon } from "lucide-react";
+
+import barreirasPolygonData from "@/data/barreiras_poligonos_cidades.geojson";
+import barreirasPranchaData from "@/data/barreiras_prancha.geojson";
 
 interface MapPoint {
   vehicle_license_plate: string;
@@ -66,8 +69,12 @@ const FleetMap = ({ data }: FleetMapProps) => {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<L.Map | null>(null);
   const tileLayerRef = useRef<L.TileLayer | null>(null);
+  const polygonLayerRef = useRef<L.GeoJSON | null>(null);
+  const pranchaLayerRef = useRef<L.GeoJSON | null>(null);
   const [activeLayer, setActiveLayer] = useState("dark");
   const [showLayerPanel, setShowLayerPanel] = useState(false);
+  const [showPolygons, setShowPolygons] = useState(true);
+  const [showPrancha, setShowPrancha] = useState(true);
 
   useEffect(() => {
     if (!mapRef.current || mapInstance.current) return;
@@ -86,6 +93,53 @@ const FleetMap = ({ data }: FleetMapProps) => {
 
     tileLayerRef.current = tile;
     mapInstance.current = map;
+
+    // GeoJSON: Polígonos de cidades
+    const polygonLayer = L.geoJSON(barreirasPolygonData as any, {
+      style: {
+        color: "#00c2ff",
+        weight: 2,
+        opacity: 0.7,
+        fillColor: "#00c2ff",
+        fillOpacity: 0.1,
+        dashArray: "4 4",
+      },
+      onEachFeature: (feature, layer) => {
+        if (feature.properties?.NOME) {
+          layer.bindTooltip(
+            `<div style="font-family:'JetBrains Mono',monospace;font-size:11px;">
+              <span style="color:#00c2ff;font-weight:700;">Polígono</span><br/>
+              <span style="color:#ccc;">${feature.properties.NOME}</span>
+            </div>`,
+            { className: "dark-tooltip", direction: "top" }
+          );
+        }
+      },
+    }).addTo(map);
+    polygonLayerRef.current = polygonLayer;
+
+    // GeoJSON: Barreiras prancha
+    const pranchaLayer = L.geoJSON(barreirasPranchaData as any, {
+      style: {
+        color: "#ff8800",
+        weight: 3,
+        opacity: 0.8,
+        lineCap: "round",
+      },
+      onEachFeature: (feature, layer) => {
+        const name = feature.properties?.NOME_MUNICIPIO || feature.properties?.cidade || "";
+        if (name) {
+          layer.bindTooltip(
+            `<div style="font-family:'JetBrains Mono',monospace;font-size:11px;">
+              <span style="color:#ff8800;font-weight:700;">Barreira Prancha</span><br/>
+              <span style="color:#ccc;">${name}</span>
+            </div>`,
+            { className: "dark-tooltip", direction: "top" }
+          );
+        }
+      },
+    }).addTo(map);
+    pranchaLayerRef.current = pranchaLayer;
 
     // Add markers
     const alertPoints: MapPoint[] = [];
@@ -137,11 +191,27 @@ const FleetMap = ({ data }: FleetMapProps) => {
     };
   }, [data]);
 
+  // Toggle GeoJSON layers
+  useEffect(() => {
+    if (!mapInstance.current) return;
+    if (polygonLayerRef.current) {
+      if (showPolygons) polygonLayerRef.current.addTo(mapInstance.current);
+      else polygonLayerRef.current.remove();
+    }
+  }, [showPolygons]);
+
+  useEffect(() => {
+    if (!mapInstance.current) return;
+    if (pranchaLayerRef.current) {
+      if (showPrancha) pranchaLayerRef.current.addTo(mapInstance.current);
+      else pranchaLayerRef.current.remove();
+    }
+  }, [showPrancha]);
+
   const switchLayer = (key: string) => {
     if (!mapInstance.current || !tileLayerRef.current) return;
     tileLayerRef.current.setUrl(TILE_LAYERS[key].url);
     setActiveLayer(key);
-    setShowLayerPanel(false);
   };
 
   const alertCount = data.filter((d) => d.posicao_com_alerta).length;
@@ -150,7 +220,7 @@ const FleetMap = ({ data }: FleetMapProps) => {
   return (
     <div className="glass-card overflow-hidden relative">
       {/* Legend */}
-      <div className="absolute top-4 left-4 z-[1000] flex items-center gap-3">
+      <div className="absolute top-4 left-4 z-[1000] flex flex-wrap items-center gap-2">
         <div className="glass-card px-3 py-1.5 flex items-center gap-2 text-[10px] !bg-card/90 backdrop-blur-xl">
           <div className="w-2.5 h-2.5 rounded-full bg-neon-red animate-pulse-glow" />
           <span className="text-muted-foreground">Alertas</span>
@@ -172,20 +242,49 @@ const FleetMap = ({ data }: FleetMapProps) => {
           <Layers className="w-4 h-4 text-neon-blue" />
         </button>
         {showLayerPanel && (
-          <div className="absolute top-12 right-0 glass-card !bg-card/95 backdrop-blur-xl p-2 min-w-[140px] space-y-1">
-            {Object.entries(TILE_LAYERS).map(([key, layer]) => (
+          <div className="absolute top-12 right-0 glass-card !bg-card/95 backdrop-blur-xl p-3 min-w-[180px] space-y-3">
+            {/* Tile layers */}
+            <div className="space-y-1">
+              <span className="text-[9px] uppercase tracking-widest text-muted-foreground font-mono-tech">Mapa Base</span>
+              {Object.entries(TILE_LAYERS).map(([key, layer]) => (
+                <button
+                  key={key}
+                  onClick={() => switchLayer(key)}
+                  className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-mono-tech transition-all duration-200 ${
+                    activeLayer === key
+                      ? "bg-neon-green/10 text-neon-green"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
+                  }`}
+                >
+                  {layer.label}
+                </button>
+              ))}
+            </div>
+
+            <div className="border-t border-border/30" />
+
+            {/* GeoJSON toggles */}
+            <div className="space-y-1">
+              <span className="text-[9px] uppercase tracking-widest text-muted-foreground font-mono-tech">Camadas</span>
               <button
-                key={key}
-                onClick={() => switchLayer(key)}
-                className={`w-full text-left px-3 py-2 rounded-lg text-xs font-mono-tech transition-all duration-200 ${
-                  activeLayer === key
-                    ? "bg-neon-green/10 text-neon-green"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
+                onClick={() => setShowPolygons(!showPolygons)}
+                className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-mono-tech flex items-center gap-2 transition-all duration-200 ${
+                  showPolygons ? "bg-[#00c2ff]/10 text-[#00c2ff]" : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
                 }`}
               >
-                {layer.label}
+                <Hexagon className="w-3 h-3" />
+                Polígonos Cidades
               </button>
-            ))}
+              <button
+                onClick={() => setShowPrancha(!showPrancha)}
+                className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-mono-tech flex items-center gap-2 transition-all duration-200 ${
+                  showPrancha ? "bg-[#ff8800]/10 text-[#ff8800]" : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
+                }`}
+              >
+                <Shield className="w-3 h-3" />
+                Barreiras Prancha
+              </button>
+            </div>
           </div>
         )}
       </div>

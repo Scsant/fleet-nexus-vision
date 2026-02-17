@@ -42,9 +42,16 @@ const AlertDistributionChart = ({ totalPosicoes, totalAlertas, posPrancha, posPo
             barSize={14}
           >
             <RadialBar
-              background={{ fill: "hsl(222, 47%, 12%)" }}
+              background={{ fill: "hsl(222, 47%, 18%)" }}
               dataKey="value"
               cornerRadius={8}
+              label={{
+                position: "insideStart",
+                fill: "hsl(210, 40%, 92%)",
+                fontSize: 10,
+                fontFamily: "'JetBrains Mono', monospace",
+                formatter: (val: number) => `${val.toFixed(1)}%`,
+              }}
             />
             <Tooltip
               formatter={(val: number) => `${val.toFixed(2)}%`}
@@ -56,6 +63,8 @@ const AlertDistributionChart = ({ totalPosicoes, totalAlertas, posPrancha, posPo
                 fontFamily: "'JetBrains Mono', monospace",
                 color: "hsl(210, 40%, 92%)",
               }}
+              labelStyle={{ color: "hsl(210, 40%, 80%)" }}
+              itemStyle={{ color: "hsl(210, 40%, 92%)" }}
             />
           </RadialBarChart>
         </ResponsiveContainer>
