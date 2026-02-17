@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { ChevronDown, ChevronUp, Users } from "lucide-react";
+
 interface DriverRow {
   driver_name: string;
   total_posicoes: number;
@@ -9,19 +12,29 @@ interface DriverTableProps {
   data: DriverRow[];
 }
 
+const INITIAL_LIMIT = 10;
+
 const DriverTable = ({ data }: DriverTableProps) => {
+  const [expanded, setExpanded] = useState(false);
   const sorted = [...data].sort((a, b) => b.taxa_alerta - a.taxa_alerta);
+  const displayed = expanded ? sorted : sorted.slice(0, INITIAL_LIMIT);
 
   return (
     <div className="glass-card overflow-hidden">
-      <div className="px-5 py-4 border-b border-border/50">
-        <h3 className="text-sm font-tech font-semibold gradient-neon-text uppercase tracking-wider">
-          Ranking Motoristas
-        </h3>
+      <div className="px-5 py-4 border-b border-border/50 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <Users className="w-4 h-4 text-neon-blue" />
+          <h3 className="text-sm font-tech font-semibold gradient-neon-text uppercase tracking-wider">
+            Ranking Motoristas
+          </h3>
+        </div>
+        <span className="text-[10px] font-mono-tech text-muted-foreground">
+          {displayed.length} de {sorted.length}
+        </span>
       </div>
-      <div className="overflow-x-auto scrollbar-dark">
+      <div className="overflow-x-auto scrollbar-dark max-h-[480px] overflow-y-auto">
         <table className="w-full text-xs">
-          <thead>
+          <thead className="sticky top-0 bg-card z-10">
             <tr className="border-b border-border/30">
               <th className="px-4 py-3 text-left text-muted-foreground uppercase tracking-wider font-medium">#</th>
               <th className="px-4 py-3 text-left text-muted-foreground uppercase tracking-wider font-medium">Motorista</th>
@@ -31,16 +44,28 @@ const DriverTable = ({ data }: DriverTableProps) => {
             </tr>
           </thead>
           <tbody>
-            {sorted.map((row, i) => {
+            {displayed.map((row, i) => {
               const pct = row.taxa_alerta * 100;
               const isDanger = pct > 30;
               return (
                 <tr
                   key={row.driver_name}
-                  className="border-b border-border/20 hover:bg-muted/30 transition-colors duration-200"
+                  className="border-b border-border/20 hover:bg-muted/30 transition-colors duration-200 group"
                 >
-                  <td className="px-4 py-3 text-muted-foreground font-mono-tech">{i + 1}</td>
-                  <td className="px-4 py-3 font-mono-tech font-semibold text-foreground">
+                  <td className="px-4 py-3 text-muted-foreground font-mono-tech">
+                    {i < 3 ? (
+                      <span className={`inline-flex items-center justify-center w-6 h-6 rounded-full text-[10px] font-bold ${
+                        i === 0 ? 'bg-neon-orange/20 text-neon-orange' :
+                        i === 1 ? 'bg-muted text-foreground' :
+                        'bg-neon-cyan/10 text-neon-cyan'
+                      }`}>
+                        {i + 1}
+                      </span>
+                    ) : (
+                      i + 1
+                    )}
+                  </td>
+                  <td className="px-4 py-3 font-mono-tech font-semibold text-foreground group-hover:text-neon-green transition-colors">
                     {row.driver_name}
                   </td>
                   <td className="px-4 py-3 text-right font-mono-tech text-muted-foreground">
@@ -68,6 +93,24 @@ const DriverTable = ({ data }: DriverTableProps) => {
           </tbody>
         </table>
       </div>
+      {sorted.length > INITIAL_LIMIT && (
+        <button
+          onClick={() => setExpanded(!expanded)}
+          className="w-full px-5 py-3 border-t border-border/30 flex items-center justify-center gap-2 text-xs font-mono-tech text-neon-blue hover:text-neon-green hover:bg-muted/20 transition-all duration-300"
+        >
+          {expanded ? (
+            <>
+              <ChevronUp className="w-3.5 h-3.5" />
+              Mostrar Top 10
+            </>
+          ) : (
+            <>
+              <ChevronDown className="w-3.5 h-3.5" />
+              Ver todos ({sorted.length})
+            </>
+          )}
+        </button>
+      )}
     </div>
   );
 };

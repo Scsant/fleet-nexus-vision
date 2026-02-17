@@ -7,9 +7,12 @@ import KpiCard from "@/components/dashboard/KpiCard";
 import FleetMap from "@/components/dashboard/FleetMap";
 import VehicleTable from "@/components/dashboard/VehicleTable";
 import DriverTable from "@/components/dashboard/DriverTable";
+import CityInvasionsChart from "@/components/dashboard/CityInvasionsChart";
+import AlertDistributionChart from "@/components/dashboard/AlertDistributionChart";
 
 import payloadData from "@/data/pbi_payload_completo.json";
 import mapData from "@/data/pbi_mapa_alertas.json";
+import cityData from "@/data/invasoes_por_cidade.json";
 
 const Index = () => {
   const kpi = payloadData.kpi_geral[0];
@@ -68,6 +71,19 @@ const Index = () => {
 
       {/* Map */}
       <FleetMap data={mapData as any} />
+
+      {/* Charts Row */}
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
+        <div className="xl:col-span-2">
+          <CityInvasionsChart data={cityData.por_cidade} />
+        </div>
+        <AlertDistributionChart
+          totalPosicoes={kpi.total_posicoes_base}
+          totalAlertas={kpi.total_posicoes_alerta}
+          posPrancha={kpi.total_posicoes_prancha}
+          posPoligono={kpi.total_posicoes_poligono}
+        />
+      </div>
 
       {/* Tables */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">

@@ -1,0 +1,419 @@
+{
+
+  "por_cidade": [
+    {
+      "cidade": "PIRAJUI",
+      "invasoes_total": 1571,
+      "caminhoes_unicos_total": 5,
+      "invasoes_barreira": 0,
+      "invasoes_poligono": 1571,
+      "caminhoes_unicos_barreira": 0,
+      "caminhoes_unicos_poligono": 5
+    },
+    {
+      "cidade": "Lençóis Paulista",
+      "invasoes_total": 154,
+      "caminhoes_unicos_total": 12,
+      "invasoes_barreira": 154,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 12,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "AVAI",
+      "invasoes_total": 31,
+      "caminhoes_unicos_total": 10,
+      "invasoes_barreira": 0,
+      "invasoes_poligono": 31,
+      "caminhoes_unicos_barreira": 0,
+      "caminhoes_unicos_poligono": 10
+    },
+    {
+      "cidade": "Avaí",
+      "invasoes_total": 30,
+      "caminhoes_unicos_total": 9,
+      "invasoes_barreira": 30,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 9,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "Pederneiras",
+      "invasoes_total": 21,
+      "caminhoes_unicos_total": 7,
+      "invasoes_barreira": 21,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 7,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "Marília",
+      "invasoes_total": 12,
+      "caminhoes_unicos_total": 8,
+      "invasoes_barreira": 12,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 8,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "Ubirajara",
+      "invasoes_total": 11,
+      "caminhoes_unicos_total": 10,
+      "invasoes_barreira": 11,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 10,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "Pirajuí",
+      "invasoes_total": 11,
+      "caminhoes_unicos_total": 3,
+      "invasoes_barreira": 11,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 3,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "Guarantã",
+      "invasoes_total": 10,
+      "caminhoes_unicos_total": 6,
+      "invasoes_barreira": 10,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 6,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "Bocaina",
+      "invasoes_total": 8,
+      "caminhoes_unicos_total": 3,
+      "invasoes_barreira": 8,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 3,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "Agudos",
+      "invasoes_total": 8,
+      "caminhoes_unicos_total": 4,
+      "invasoes_barreira": 8,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 4,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "São Pedro do Turvo",
+      "invasoes_total": 6,
+      "caminhoes_unicos_total": 3,
+      "invasoes_barreira": 6,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 3,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "Oriente",
+      "invasoes_total": 5,
+      "caminhoes_unicos_total": 2,
+      "invasoes_barreira": 5,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 2,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "GUARANTA",
+      "invasoes_total": 5,
+      "caminhoes_unicos_total": 5,
+      "invasoes_barreira": 0,
+      "invasoes_poligono": 5,
+      "caminhoes_unicos_barreira": 0,
+      "caminhoes_unicos_poligono": 5
+    },
+    {
+      "cidade": "Águas de Santa Bárbara",
+      "invasoes_total": 4,
+      "caminhoes_unicos_total": 3,
+      "invasoes_barreira": 4,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 3,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "Angatuba",
+      "invasoes_total": 4,
+      "caminhoes_unicos_total": 2,
+      "invasoes_barreira": 4,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 2,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "Bofete",
+      "invasoes_total": 3,
+      "caminhoes_unicos_total": 2,
+      "invasoes_barreira": 3,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 2,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "Dois Córregos",
+      "invasoes_total": 3,
+      "caminhoes_unicos_total": 3,
+      "invasoes_barreira": 3,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 3,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "Jaú",
+      "invasoes_total": 3,
+      "caminhoes_unicos_total": 3,
+      "invasoes_barreira": 3,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 3,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "Pratânia",
+      "invasoes_total": 3,
+      "caminhoes_unicos_total": 3,
+      "invasoes_barreira": 3,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 3,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "Borebi",
+      "invasoes_total": 3,
+      "caminhoes_unicos_total": 3,
+      "invasoes_barreira": 3,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 3,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "Alvinlândia",
+      "invasoes_total": 2,
+      "caminhoes_unicos_total": 2,
+      "invasoes_barreira": 2,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 2,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "Echaporã",
+      "invasoes_total": 2,
+      "caminhoes_unicos_total": 1,
+      "invasoes_barreira": 2,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 1,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "São Manuel",
+      "invasoes_total": 2,
+      "caminhoes_unicos_total": 2,
+      "invasoes_barreira": 2,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 2,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "Paranapanema",
+      "invasoes_total": 2,
+      "caminhoes_unicos_total": 2,
+      "invasoes_barreira": 2,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 2,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "Santa Maria da Serra",
+      "invasoes_total": 2,
+      "caminhoes_unicos_total": 2,
+      "invasoes_barreira": 2,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 2,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "Santa Cruz do Rio Pardo",
+      "invasoes_total": 2,
+      "caminhoes_unicos_total": 2,
+      "invasoes_barreira": 2,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 2,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "UBIRAJARA",
+      "invasoes_total": 2,
+      "caminhoes_unicos_total": 1,
+      "invasoes_barreira": 0,
+      "invasoes_poligono": 2,
+      "caminhoes_unicos_barreira": 0,
+      "caminhoes_unicos_poligono": 1
+    },
+    {
+      "cidade": "IGARACU DO TIETE",
+      "invasoes_total": 2,
+      "caminhoes_unicos_total": 2,
+      "invasoes_barreira": 0,
+      "invasoes_poligono": 2,
+      "caminhoes_unicos_barreira": 0,
+      "caminhoes_unicos_poligono": 2
+    },
+    {
+      "cidade": "GARCA",
+      "invasoes_total": 2,
+      "caminhoes_unicos_total": 2,
+      "invasoes_barreira": 0,
+      "invasoes_poligono": 2,
+      "caminhoes_unicos_barreira": 0,
+      "caminhoes_unicos_poligono": 2
+    },
+    {
+      "cidade": "LENCOIS PAULISTA",
+      "invasoes_total": 2,
+      "caminhoes_unicos_total": 2,
+      "invasoes_barreira": 0,
+      "invasoes_poligono": 2,
+      "caminhoes_unicos_barreira": 0,
+      "caminhoes_unicos_poligono": 2
+    },
+    {
+      "cidade": "Bariri",
+      "invasoes_total": 1,
+      "caminhoes_unicos_total": 1,
+      "invasoes_barreira": 1,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 1,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "Botucatu",
+      "invasoes_total": 1,
+      "caminhoes_unicos_total": 1,
+      "invasoes_barreira": 1,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 1,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "AVARE",
+      "invasoes_total": 1,
+      "caminhoes_unicos_total": 1,
+      "invasoes_barreira": 0,
+      "invasoes_poligono": 1,
+      "caminhoes_unicos_barreira": 0,
+      "caminhoes_unicos_poligono": 1
+    },
+    {
+      "cidade": "ANGATUBA",
+      "invasoes_total": 1,
+      "caminhoes_unicos_total": 1,
+      "invasoes_barreira": 0,
+      "invasoes_poligono": 1,
+      "caminhoes_unicos_barreira": 0,
+      "caminhoes_unicos_poligono": 1
+    },
+    {
+      "cidade": "ALVINLANDIA",
+      "invasoes_total": 1,
+      "caminhoes_unicos_total": 1,
+      "invasoes_barreira": 0,
+      "invasoes_poligono": 1,
+      "caminhoes_unicos_barreira": 0,
+      "caminhoes_unicos_poligono": 1
+    },
+    {
+      "cidade": "Arealva",
+      "invasoes_total": 1,
+      "caminhoes_unicos_total": 1,
+      "invasoes_barreira": 1,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 1,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "ECHAPORA",
+      "invasoes_total": 1,
+      "caminhoes_unicos_total": 1,
+      "invasoes_barreira": 0,
+      "invasoes_poligono": 1,
+      "caminhoes_unicos_barreira": 0,
+      "caminhoes_unicos_poligono": 1
+    },
+    {
+      "cidade": "Lupércio",
+      "invasoes_total": 1,
+      "caminhoes_unicos_total": 1,
+      "invasoes_barreira": 1,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 1,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "Júlio Mesquita",
+      "invasoes_total": 1,
+      "caminhoes_unicos_total": 1,
+      "invasoes_barreira": 1,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 1,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "Itatinga",
+      "invasoes_total": 1,
+      "caminhoes_unicos_total": 1,
+      "invasoes_barreira": 1,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 1,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "JULIO MESQUITA",
+      "invasoes_total": 1,
+      "caminhoes_unicos_total": 1,
+      "invasoes_barreira": 0,
+      "invasoes_poligono": 1,
+      "caminhoes_unicos_barreira": 0,
+      "caminhoes_unicos_poligono": 1
+    },
+    {
+      "cidade": "Igaraçu do Tietê",
+      "invasoes_total": 1,
+      "caminhoes_unicos_total": 1,
+      "invasoes_barreira": 1,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 1,
+      "caminhoes_unicos_poligono": 0
+    },
+    {
+      "cidade": "GETULINA",
+      "invasoes_total": 1,
+      "caminhoes_unicos_total": 1,
+      "invasoes_barreira": 0,
+      "invasoes_poligono": 1,
+      "caminhoes_unicos_barreira": 0,
+      "caminhoes_unicos_poligono": 1
+    },
+    {
+      "cidade": "PIRATININGA",
+      "invasoes_total": 1,
+      "caminhoes_unicos_total": 1,
+      "invasoes_barreira": 0,
+      "invasoes_poligono": 1,
+      "caminhoes_unicos_barreira": 0,
+      "caminhoes_unicos_poligono": 1
+    },
+    {
+      "cidade": "Macatuba",
+      "invasoes_total": 1,
+      "caminhoes_unicos_total": 1,
+      "invasoes_barreira": 1,
+      "invasoes_poligono": 0,
+      "caminhoes_unicos_barreira": 1,
+      "caminhoes_unicos_poligono": 0
+    }
+  ]
+}
