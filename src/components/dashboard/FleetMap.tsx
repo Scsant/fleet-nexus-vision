@@ -3,8 +3,8 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { Layers, Shield, Hexagon } from "lucide-react";
 
-import barreirasPolygonData from "@/data/barreiras_poligonos_cidades.geojson";
-import barreirasPranchaData from "@/data/barreiras_prancha.geojson";
+import barreirasPolygonData from "@/data/barreiras_poligonos_cidades.json";
+import barreirasPranchaData from "@/data/barreiras_prancha.json";
 
 interface MapPoint {
   vehicle_license_plate: string;
