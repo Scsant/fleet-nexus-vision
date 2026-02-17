@@ -1,6 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { Layers } from "lucide-react";
 
 interface MapPoint {
   vehicle_license_plate: string;
@@ -15,6 +16,25 @@ interface MapPoint {
 interface FleetMapProps {
   data: MapPoint[];
 }
+
+const TILE_LAYERS: Record<string, { url: string; label: string }> = {
+  dark: {
+    url: "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+    label: "Dark",
+  },
+  satellite: {
+    url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+    label: "Satélite",
+  },
+  topo: {
+    url: "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+    label: "Topográfico",
+  },
+  streets: {
+    url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    label: "Ruas",
+  },
+};
 
 const createAlertIcon = (hasPrancha: boolean, hasPoligono: boolean) => {
   let borderColor = "#ff3355";
@@ -45,6 +65,9 @@ const normalIcon = L.divIcon({
 const FleetMap = ({ data }: FleetMapProps) => {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<L.Map | null>(null);
+  const tileLayerRef = useRef<L.TileLayer | null>(null);
+  const [activeLayer, setActiveLayer] = useState("dark");
+  const [showLayerPanel, setShowLayerPanel] = useState(false);
 
   useEffect(() => {
     if (!mapRef.current || mapInstance.current) return;
@@ -56,12 +79,12 @@ const FleetMap = ({ data }: FleetMapProps) => {
       attributionControl: true,
     });
 
-    // Dark tile layer
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+    const tile = L.tileLayer(TILE_LAYERS.dark.url, {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
       maxZoom: 19,
     }).addTo(map);
 
+    tileLayerRef.current = tile;
     mapInstance.current = map;
 
     // Add markers
@@ -76,17 +99,13 @@ const FleetMap = ({ data }: FleetMapProps) => {
       }
     });
 
-    // Normal markers first (background)
     normalPoints.forEach((pt) => {
-      L.marker([pt.location_latitude, pt.location_longitude], { icon: normalIcon })
-        .addTo(map);
+      L.marker([pt.location_latitude, pt.location_longitude], { icon: normalIcon }).addTo(map);
     });
 
-    // Alert markers on top
     alertPoints.forEach((pt) => {
       const icon = createAlertIcon(pt.intersecta_barreira_prancha, pt.dentro_poligono_cidade);
-      const marker = L.marker([pt.location_latitude, pt.location_longitude], { icon })
-        .addTo(map);
+      const marker = L.marker([pt.location_latitude, pt.location_longitude], { icon }).addTo(map);
 
       const statusTags: string[] = [];
       if (pt.intersecta_barreira_prancha) statusTags.push("Prancha");
@@ -107,7 +126,6 @@ const FleetMap = ({ data }: FleetMapProps) => {
       });
     });
 
-    // Fit bounds
     if (data.length > 0) {
       const bounds = L.latLngBounds(data.map((pt) => [pt.location_latitude, pt.location_longitude]));
       map.fitBounds(bounds, { padding: [40, 40] });
@@ -119,24 +137,59 @@ const FleetMap = ({ data }: FleetMapProps) => {
     };
   }, [data]);
 
+  const switchLayer = (key: string) => {
+    if (!mapInstance.current || !tileLayerRef.current) return;
+    tileLayerRef.current.setUrl(TILE_LAYERS[key].url);
+    setActiveLayer(key);
+    setShowLayerPanel(false);
+  };
+
+  const alertCount = data.filter((d) => d.posicao_com_alerta).length;
+  const normalCount = data.filter((d) => !d.posicao_com_alerta).length;
+
   return (
     <div className="glass-card overflow-hidden relative">
-      <div className="absolute top-4 left-4 z-[1000] flex items-center gap-4">
-        <div className="glass-card px-3 py-1.5 flex items-center gap-2 text-[10px]">
+      {/* Legend */}
+      <div className="absolute top-4 left-4 z-[1000] flex items-center gap-3">
+        <div className="glass-card px-3 py-1.5 flex items-center gap-2 text-[10px] !bg-card/90 backdrop-blur-xl">
           <div className="w-2.5 h-2.5 rounded-full bg-neon-red animate-pulse-glow" />
           <span className="text-muted-foreground">Alertas</span>
-          <span className="font-mono-tech text-neon-red font-semibold">
-            {data.filter((d) => d.posicao_com_alerta).length}
-          </span>
+          <span className="font-mono-tech text-neon-red font-semibold">{alertCount}</span>
         </div>
-        <div className="glass-card px-3 py-1.5 flex items-center gap-2 text-[10px]">
+        <div className="glass-card px-3 py-1.5 flex items-center gap-2 text-[10px] !bg-card/90 backdrop-blur-xl">
           <div className="w-2.5 h-2.5 rounded-full bg-neon-green opacity-70" />
           <span className="text-muted-foreground">Normal</span>
-          <span className="font-mono-tech text-neon-green font-semibold">
-            {data.filter((d) => !d.posicao_com_alerta).length}
-          </span>
+          <span className="font-mono-tech text-neon-green font-semibold">{normalCount}</span>
         </div>
       </div>
+
+      {/* Layer control */}
+      <div className="absolute top-4 right-4 z-[1000]">
+        <button
+          onClick={() => setShowLayerPanel(!showLayerPanel)}
+          className="glass-card !bg-card/90 backdrop-blur-xl p-2.5 hover:border-neon-blue/40 transition-all duration-200"
+        >
+          <Layers className="w-4 h-4 text-neon-blue" />
+        </button>
+        {showLayerPanel && (
+          <div className="absolute top-12 right-0 glass-card !bg-card/95 backdrop-blur-xl p-2 min-w-[140px] space-y-1">
+            {Object.entries(TILE_LAYERS).map(([key, layer]) => (
+              <button
+                key={key}
+                onClick={() => switchLayer(key)}
+                className={`w-full text-left px-3 py-2 rounded-lg text-xs font-mono-tech transition-all duration-200 ${
+                  activeLayer === key
+                    ? "bg-neon-green/10 text-neon-green"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
+                }`}
+              >
+                {layer.label}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
       <div ref={mapRef} className="w-full h-[500px] lg:h-[600px]" />
     </div>
   );
