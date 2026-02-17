@@ -9,7 +9,7 @@ const DashboardHeader = () => {
         </div>
         <div>
           <h1 className="text-lg md:text-xl font-tech font-bold gradient-neon-text leading-tight">
-            Central de Monitoramento
+            Análise Espacial Barreiras - Pranchas
           </h1>
           <p className="text-xs text-muted-foreground font-mono-tech mt-0.5">
             Operacional • Frota em Tempo Real
